@@ -1,8 +1,6 @@
 import logging
 import sys
-from datetime import datetime
-from typing import Dict, Any, Optional, Tuple, Type, Union
-import pytz
+from typing import Dict, Any, Optional, Tuple, Type
 
 # configure logging
 logger = logging.getLogger(__name__)
@@ -201,7 +199,7 @@ def map_value(value: Any, metric_id: str) -> Tuple[str, Optional[str]]:
     elif metric_id in METRIC_TYPES_WEARABLE:
         value_type, metric_group = METRIC_TYPES_WEARABLE[metric_id], "WEARABLE"
 
-    if value_type == bool:
+    if value_type is bool:
         processed_value = int(1) if value == 1 or value == '1' else int(0)
     else:
         processed_value = value
