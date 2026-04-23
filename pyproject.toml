@@ -13,13 +13,13 @@ authors = [
 ]
 license = { text = "MIT" }
 dependencies = [
-    "numpy==1.23.4",
-    "pandas==1.5.0",
-    "pyarrow==9.0.0",
-    "python-dateutil==2.8.2",
-    "pytz==2022.5",
-    "six==1.16.0",
-    "toml==0.10.2",
+    "numpy>=1.23.4,<2.0.0",
+    "pandas>=1.5.0",
+    "pyarrow>=9.0.0",
+    "python-dateutil>=2.8.2",
+    "pytz>=2022.5",
+    "six>=1.16.0",
+    "toml>=0.10.2",
 ]
 
 [project.optional-dependencies]

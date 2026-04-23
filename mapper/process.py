@@ -55,20 +55,20 @@ def process_file(file_path: str, output_file: str, metrics: Optional[List[str]],
             # Original logic for timestamp construction
             # Assumes 'Timestamp' might be HH:MM:SS.mmm or similar
             ts_str = str(row['Timestamp'])
-            try:
-                # Basic attempt to see if it's already a full ISO string
-                pd.to_datetime(ts_str)
-                time_value = ts_str
-            except (ValueError, TypeError):
-                # Fallback to the prepending logic from original scripts
-                # Extracts HH:MM:SS and .mmm if possible
+            
+            # Check if it looks like just a time (e.g., HH:MM:SS.mmm)
+            # A full ISO timestamp should have a date part (e.g., YYYY-MM-DD)
+            if len(ts_str) < 15 or 'T' not in ts_str and ts_str.count('-') < 2:
+                # Prepend the current date
                 parts = ts_str.split()
                 time_part = parts[-1] if parts else ts_str
                 time_value = f"{date_prefix}T{time_part}"
                 if '.' not in time_value:
-                    time_value += ".000Z"
-                elif not time_value.endswith('Z'):
+                    time_value += ".000"
+                if not time_value.endswith('Z'):
                     time_value += 'Z'
+            else:
+                time_value = ts_str
 
             event: Dict[str, Any] = {
                 'sourceId': row['Sensor'],
