@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stream-aggregator-evaluation-mapper"
+version = "0.1.0"
+description = "A CLI tool to map and convert .feather data files into RDF triples."
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name = "Kushagra Singh Bisen", email = "kushagrasingh.bisen@ugent.be" }
+]
+license = { text = "MIT" }
+dependencies = [
+    "numpy==1.23.4",
+    "pandas==1.5.0",
+    "pyarrow==9.0.0",
+    "python-dateutil==2.8.2",
+    "pytz==2022.5",
+    "six==1.16.0",
+    "toml==0.10.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "autopep8==1.7.0",
+    "pycodestyle==2.9.1",
+]
+
+[project.scripts]
+feather-mapper = "mapper.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["mapper*"]
